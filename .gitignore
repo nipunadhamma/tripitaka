@@ -1,0 +1,7 @@
+﻿.git-backup/
+dev/
+node_modules/
+
+# Large Tripitaka data files - keep locally, do not upload to GitHub
+/public/static/data/
+/public/static/text/
