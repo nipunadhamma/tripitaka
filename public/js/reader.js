@@ -77,7 +77,6 @@
     await loadTextData(state.activeInd)
     syncOpenBranches()
     updateHash()
-    renderAll()
   }
 
   function replaceActiveTab(params) {
@@ -294,6 +293,7 @@
 
     const settings = store.settings
     const isAtta = tab.keyProp.filename.indexOf('atta-') == 0
+    if (!tab.language) tab.columns = settings.defaultColumns
     const opts = {
       settings: settings,
       columns: tab.columns,
@@ -302,6 +302,22 @@
     }
 
     const pages = getVisiblePages(tabIndex)
+
+    /*
+     * Performance: keep only a window of pages in the DOM.
+     *
+     * As the reader loads more pages ("load next") the accumulated
+     * pages grow without bound, which makes every later re-render
+     * (tab switch, settings change…) rebuild a huge document on
+     * mobile. Cap the visible window and advance pageStart so the
+     * dropped pages stay dropped.
+     */
+    const cap = window.innerWidth < 768 ? 12 : 50
+    if (pages.length > cap) {
+      tab.pageStart = tab.pageEnd - cap
+      pages.splice(0, pages.length - cap)
+    }
+
     let html = '<div class="book' +
       (opts.columns == 2 ? ' book-spread-mode' : (opts.columns == 3 ? ' book-interlinear-mode' : '')) + '">'
     pages.forEach(function (pg) {

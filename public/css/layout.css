@@ -153,33 +153,145 @@
 }
 .icon-btn:hover { background: var(--paper-deep); color: var(--accent-deep); }
 
-/* ---------------- Sidebar (Tipitaka tree) ---------------- */
+/* ============================================================
+   Sidebar / Tripitaka Book Tree
+   ============================================================ */
+
 .sidebar {
   position: fixed;
+
   top: var(--header-h);
   bottom: 0;
   left: 0;
+
   z-index: 30;
+
   width: 320px;
   max-width: 88vw;
+
   background: var(--paper-light);
+
   border-right: 1px solid var(--paper-dark);
+
   box-shadow: var(--shadow-soft);
+
   overflow-y: auto;
+
   padding: 0.6rem;
+
   transform: translateX(-105%);
-  transition: transform 0.25s ease;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
-.sidebar.open { transform: translateX(0); }
-.sidebar-backdrop {
-  position: fixed;
-  inset: var(--header-h) 0 0 0;
-  z-index: 29;
-  background: rgba(40, 28, 10, 0.35);
-  display: none;
+
+.sidebar.open {
+  transform: translateX(0);
 }
-.sidebar-backdrop.show { display: block; }
-[data-theme='dark'] .sidebar-backdrop { background: rgba(0, 0, 0, 0.5); }
+
+css
+/* ============================================================
+   Suththa.org — Book Tree Nested Layout Fix
+   Children must open BELOW their parent
+   ============================================================ */
+
+/* Every tree node is a vertical block */
+.sidebar .tree-node {
+  display: block !important;
+  width: 100%;
+  position: relative;
+}
+
+/* Parent row itself */
+.sidebar .tree-node>.tree-item {
+  display: flex !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   IMPORTANT:
+   Nested children MUST be below the parent row.
+   Never allow the nested UL to become a flex item beside it.
+   ------------------------------------------------------------ */
+
+.sidebar .tree-node>.tree-list {
+  display: block !important;
+
+  width: 100%;
+
+  margin: 0 !important;
+
+  padding-top: 0 !important;
+  padding-right: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 1.15rem !important;
+
+  box-sizing: border-box;
+
+  list-style: none !important;
+}
+
+/* Nested LI must also remain block */
+.sidebar .tree-list>.tree-node {
+  display: block !important;
+  width: 100%;
+}
+
+/* ------------------------------------------------------------
+   Deeper levels
+   ------------------------------------------------------------ */
+
+.sidebar .tree-list .tree-list {
+  display: block !important;
+
+  width: 100%;
+
+  padding-left: 1.15rem !important;
+}
+
+/* ------------------------------------------------------------
+   Do not let tree elements participate in sidebar flex layout
+   ------------------------------------------------------------ */
+
+.sidebar .tree-list,
+.sidebar .tree-node {
+  flex: none !important;
+}
+
+/* ------------------------------------------------------------
+   Keep labels inside available width
+   ------------------------------------------------------------ */
+
+.sidebar .tree-label {
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------
+   Mobile / narrow sidebar
+   ------------------------------------------------------------ */
+
+@media (max-width: 899px) {
+
+  .sidebar {
+    width: min(320px, 88vw);
+  }
+
+  .sidebar .tree-node>.tree-list {
+    padding-left: 0.9rem !important;
+  }
+
+  .sidebar .tree-list .tree-list {
+    padding-left: 0.9rem !important;
+  }
+}
+
+
 
 /* ---------------- Nav links (main-nav) ---------------- */
 .nav-links {
@@ -199,46 +311,101 @@
 .nav-links a.active { background: var(--accent); color: var(--paper-light); }
 
 /* ---------------- Header search dropdown ---------------- */
-#search-box { flex: 1; max-width: 34rem; margin: 0 auto; position: relative; }
-#search-box .search-input-wrap { position: relative; }
+
+#search-box {
+  flex: 1;
+  max-width: 34rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+#search-box .search-input-wrap {
+  position: relative;
+}
+
 .search-dropdown {
   position: absolute;
   top: 100%;
   left: 0;
   right: 0;
+
   z-index: 60;
+
   background: var(--paper-light);
+
   border: 1px solid var(--paper-dark);
   border-radius: var(--radius);
+
   box-shadow: var(--shadow-page);
+
   max-height: 60vh;
+
   overflow-y: auto;
+
   display: none;
+
   margin-top: 0.25rem;
 }
-.search-dropdown.show { display: block; }
+
+.search-dropdown.show {
+  display: block;
+}
+
 .sd-item {
   padding: 0.45rem 0.7rem;
+
   cursor: pointer;
+
   border-bottom: 1px solid var(--paper-edge);
+
   font-size: 0.9rem;
+
   display: flex;
+
   gap: 0.5rem;
+
   align-items: baseline;
 }
-.sd-item:hover { background: var(--paper-deep); }
-.sd-item .sd-key { margin-left: auto; font-size: 0.75rem; }
-.sd-empty { padding: 0.6rem 0.7rem; font-size: 0.9rem; }
+
+.sd-item:hover {
+  background: var(--paper-deep);
+}
+
+.sd-item .sd-key {
+  margin-left: auto;
+  font-size: 0.75rem;
+}
+
+.sd-empty {
+  padding: 0.6rem 0.7rem;
+  font-size: 0.9rem;
+}
+
 .search-filters {
   display: flex;
+
   gap: 0.7rem;
+
   justify-content: flex-end;
+
   align-items: center;
+
   margin-top: 0.15rem;
 }
-.search-filters label { display: inline-flex; gap: 0.25rem; align-items: center; cursor: pointer; }
-.search-filters input { accent-color: var(--accent); }
 
+.search-filters label {
+  display: inline-flex;
+
+  gap: 0.25rem;
+
+  align-items: center;
+
+  cursor: pointer;
+}
+
+.search-filters input {
+  accent-color: var(--accent);
+}
 /* ---------------- Tabs strip ---------------- */
 .tabs-strip {
   display: flex;
@@ -366,3 +533,209 @@
   color: var(--ink-faint);
   font-size: 0.8rem;
 }
+
+/* ============================================================
+   Desktop Book Tree Layout
+   Tree occupies real layout space.
+   It must NOT overlap the reader.
+   ============================================================ */
+
+@media (min-width: 900px) {
+
+  .app-main {
+    display: flex;
+    align-items: stretch;
+    min-height: 0;
+  }
+
+  .sidebar {
+    position: sticky;
+
+    top: var(--header-h);
+
+    flex: 0 0 0;
+
+    width: 0;
+    max-width: none;
+
+    height: calc(100vh - var(--header-h));
+
+    padding: 0;
+
+    border-right: 0;
+
+    box-shadow: none;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    transform: none;
+
+    transition:
+      width 0.25s ease,
+      flex-basis 0.25s ease,
+      padding 0.25s ease,
+      border-color 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .sidebar.open {
+    flex: 0 0 320px;
+
+    width: 320px;
+
+    padding: 0.6rem;
+
+    border-right: 1px solid var(--paper-dark);
+
+    box-shadow: var(--shadow-soft);
+  }
+
+  .app-content {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+  }
+
+  .sidebar-backdrop {
+    display: none !important;
+  }
+}
+css
+/* ============================================================
+   Suththa.org — Book Tree Reset
+   Remove browser default UL / LI markers
+   ============================================================ */
+
+/* Book tree itself */
+.sidebar ul,
+.sidebar ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Every tree item */
+.sidebar li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove browser-generated marker */
+.sidebar li::marker {
+  content: "";
+}
+
+/* Nested lists */
+.sidebar ul ul,
+.sidebar ol ol,
+.sidebar ul ol,
+.sidebar ol ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------
+   Tree indentation
+   ------------------------------------------------------------ */
+
+.sidebar ul ul {
+  padding-left: 1rem;
+}
+
+/* ------------------------------------------------------------
+   Tree rows
+   ------------------------------------------------------------ */
+
+.sidebar li>div,
+.sidebar li>button,
+.sidebar li>a {
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   Do not allow text to create strange wrapping
+   ------------------------------------------------------------ */
+
+.sidebar {
+  font-family: var(--font-sinhala-body, inherit);
+}
+
+.sidebar * {
+  box-sizing: border-box;
+}
+
+/* ------------------------------------------------------------
+   Book tree text
+   ------------------------------------------------------------ */
+
+.sidebar .tree,
+.sidebar .book-tree,
+.sidebar .tree-root,
+.sidebar .tree-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .tree li,
+.sidebar .book-tree li,
+.sidebar .tree-root li,
+.sidebar .tree-list li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar .tree li::marker,
+.sidebar .book-tree li::marker,
+.sidebar .tree-root li::marker,
+.sidebar .tree-list li::marker {
+  content: "";
+}
+
+/* ------------------------------------------------------------
+   Prevent accidental paragraph/list spacing inside tree
+   ------------------------------------------------------------ */
+
+.sidebar li p {
+  margin: 0;
+  padding: 0;
+}
+
+/* ------------------------------------------------------------
+   Tree links/buttons should not inherit browser list styling
+   ------------------------------------------------------------ */
+
+.sidebar li a,
+.sidebar li button {
+  text-decoration: none;
+}
+
+/* ------------------------------------------------------------
+   Mobile / tablet tree
+   ------------------------------------------------------------ */
+
+@media (max-width: 899px) {
+
+  .sidebar {
+    width: min(320px, 88vw);
+    max-width: 88vw;
+  }
+
+  .sidebar ul,
+  .sidebar ol {
+    list-style: none;
+  }
+
+  .sidebar li {
+    list-style: none;
+  }
+
+  .sidebar li::marker {
+    content: "";
+  }
+}
+

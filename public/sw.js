@@ -6,7 +6,7 @@
    ============================================================ */
 'use strict'
 
-const VERSION = 'suththa-v1'
+const VERSION = 'suththa-v7'
 const CACHE = VERSION
 
 const SHELL = [
@@ -18,6 +18,7 @@ const SHELL = [
   './css/variables.css',
   './css/fonts.css',
   './css/main.css',
+  './css/navbar.css',
   './css/layout.css',
   './css/components.css',
   './css/reader.css',
@@ -118,12 +119,18 @@ self.addEventListener('fetch', function (e) {
     return
   }
 
+  // app JS/CSS: stale-while-revalidate so code updates reach clients
+  if (/\.(js|css)$/.test(url.pathname)) {
+    e.respondWith(staleWhileRevalidate(req))
+    return
+  }
+
   // page navigations (including deep links): network-first
   if (req.mode === 'navigate') {
     e.respondWith(networkFirst(req))
     return
   }
 
-  // everything else (css/js/images): cache-first
+  // everything else (images): cache-first
   e.respondWith(cacheFirst(req))
 })

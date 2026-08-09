@@ -2,6 +2,4 @@
 dev/
 node_modules/
 
-# Large Tripitaka data files - keep locally, do not upload to GitHub
-/public/static/data/
-/public/static/text/
+# Large Tripitaka data files are deployed with the GitHub Pages site

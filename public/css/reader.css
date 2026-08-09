@@ -46,6 +46,12 @@
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.55);
 }
 
+/* Skip rendering off-screen pages (big win on long reads / mobile) */
+.book-page {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 40em;
+}
+
 /* parallel two-page spread (like facing pages of a book) */
 .book-spread {
   display: grid;

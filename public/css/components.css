@@ -116,9 +116,15 @@
   margin: 0;
   padding-left: 1rem;
   border-left: 1px dotted var(--paper-dark);
+}
+
+.tree-node>.tree-list {
   display: none;
 }
-.tree-item.open + ul { display: block; }
+
+.tree-node>.tree-item.open+.tree-list {
+  display: block;
+}
 .tree-item {
   display: flex;
   align-items: center;
@@ -195,7 +201,7 @@
 .dialog-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 90;
+  z-index: 300;
   background: rgba(40, 28, 10, 0.4);
   display: none;
   align-items: flex-start;

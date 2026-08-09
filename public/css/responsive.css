@@ -2,6 +2,30 @@
    Suththa.org — Responsive
    ============================================================ */
 
+@media (max-width: 768px) {
+  /* Toolbar actions moved into the right drawer on mobile */
+  .reader-toolbar { display: none; }
+
+  /* Reader page spacing */
+  .book-page { padding: 1.4rem 1.1rem 1rem; }
+  .book { padding: 0 0.4rem; }
+  .book-cover { padding: 2.2rem 1.4rem; margin: 2rem 0.6rem; }
+
+  /* Settings dialog -> bottom sheet */
+  .dialog-backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+  .dialog {
+    max-width: 100%;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    border-bottom: none;
+    max-height: 85vh;
+    overflow-y: auto;
+  }
+  .settings-grid { grid-template-columns: 1fr; }
+}
+
 @media (max-width: 900px) {
   .book-spread { display: block; }
   .book-spread .col + .col,
