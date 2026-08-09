@@ -194,3 +194,83 @@
         flex-wrap: wrap;
     }
 }
+/* ============================================================
+   Suththa.org — Site Footer
+   ============================================================ */
+
+.site-footer {
+    width: 100%;
+    margin-top: 3rem;
+    border-top: 1px solid var(--paper-edge);
+    background: var(--paper-deep);
+    color: var(--ink-soft);
+}
+
+.footer-inner {
+    max-width: var(--content-max, 1200px);
+    margin: 0 auto;
+    padding: 1.5rem 1rem 1.2rem;
+    text-align: center;
+}
+
+.footer-brand {
+    margin-bottom: 0.7rem;
+}
+
+.footer-title {
+    font-family: var(--font-sinhala-heading);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--accent-deep);
+}
+
+.footer-subtitle {
+    margin-top: 0.2rem;
+    font-size: 0.78rem;
+}
+
+.footer-sites {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    margin-top: 0.8rem;
+    font-size: 0.75rem;
+}
+
+.footer-sites a {
+    color: var(--accent-deep);
+    text-decoration: none;
+}
+
+.footer-sites a:hover {
+    text-decoration: underline;
+}
+
+.footer-sites span {
+    color: var(--ink-faint);
+}
+
+.footer-copy {
+    margin-top: 0.65rem;
+    font-size: 0.7rem;
+    color: var(--ink-faint);
+}
+
+@media (max-width: 768px) {
+    .footer-inner {
+        padding: 1.2rem 0.8rem 1rem;
+    }
+
+    .footer-title {
+        font-size: 0.95rem;
+    }
+
+    .footer-subtitle {
+        font-size: 0.74rem;
+    }
+
+    .footer-sites {
+        font-size: 0.72rem;
+    }
+}

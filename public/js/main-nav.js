@@ -40,8 +40,10 @@
     // Brand
     html +=
       '<a class="brand" href="./index.html">' +
-        '<span class="brand-mark">❁</span>' +
-        '<span class="brand-text">Suththa.org<small>ත්‍රිපිටකය</small></span>' +
+      '<span class="brand-mark">' +
+      '<img src="./static/images/app-logo.png" alt="Suththa.org">' +
+      "</span>" +
+      '<span class="brand-text">Suththa.org<small>ත්‍රිපිටකය</small></span>' +
       "</a>";
 
     // Desktop navigation
@@ -63,15 +65,12 @@
     // Header actions
     html +=
       '<div class="header-actions">' +
-
-        // Mobile drawer button
-        '<button id="nav-more-toggle" class="icon-btn nav-more-toggle" ' +
-        'title="මෙනුව" aria-expanded="false">⋯</button>' +
-
-        // Theme button
-        '<button id="theme-toggle" class="icon-btn" ' +
-        'title="තද පසුබිම / ආලෝකය">🌙</button>' +
-
+      // Mobile drawer button
+      '<button id="nav-more-toggle" class="icon-btn nav-more-toggle" ' +
+      'title="සැකසුම්" aria-label="සැකසුම්" aria-expanded="false">⚙︎</button>' +
+      // Theme button
+      '<button id="theme-toggle" class="icon-btn" ' +
+      'title="තද පසුබිම / ආලෝකය">🌙</button>' +
       "</div>";
 
     html += "</header>";
